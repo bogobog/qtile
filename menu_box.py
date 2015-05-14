@@ -11,12 +11,12 @@ class MenuBoxChild( DropDownBoxChild ):
         if not e.detail == 1:
             self.toggle_hidden()
             
-        menu_item = self.get_menu_item( e.event_x, e.event_y )
+        menu_item = self.getMenuItem( e.event_x, e.event_y )
         self.toggle_hidden()
 
         self.spawn_process( menu_item['command'] )
 
-    def get_menu_item( self, x, y ):
+    def getMenuItem( self, x, y ):
         per_item_size = self.height / len( self.parent.menu_items )
         item_index = int( math.floor( float( y ) / per_item_size ) )
 
