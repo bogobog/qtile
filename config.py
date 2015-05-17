@@ -118,7 +118,7 @@ for i in groups:
 
 layouts = [
     layout.Max(),
-    layout.MonadTall()
+    custom.SmallerMonadTall()
 ]
 
 floating_layout = layout.floating.Floating( float_rules = [ 
@@ -132,10 +132,8 @@ floating_layout = layout.floating.Floating( float_rules = [
     "dialog",
     "keepass2",
     "kcalc",
-  ) ] + [ 
-  { 'wname': x } for x in (
-    'Buddy List',
-  )  ]  )
+  ) ]
+)
 
 widget_defaults = dict(
     font='Droid Sans Mono',
@@ -143,10 +141,13 @@ widget_defaults = dict(
     padding=3,
 )
 
-wireless_menu_items = [
+menu_one_menu_items = [
     { 'name': 'Apelint',
       'command': 'apelint_wireless.sh',
-    },  
+    },
+    { 'name': 'Keepass',
+      'command': 'keepass',
+    }
 ]
 
 screens = [
@@ -161,11 +162,13 @@ screens = [
                 custom.BlackSep(),
                 custom.DropDownBox( name = 'TimeDropDownBox' ),
                 custom.BlackSep(),
+                custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
+                custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
                 custom.BlackSep(),
                 custom.NotificationBox( name = 'NotificationBox' ),
                 custom.BlackSep(),
-                custom.MenuBox( name = 'WirelessMenuBox', title = 'W', menu_items = wireless_menu_items ),
+                custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
             ],
             20,
             background = '#737373',
