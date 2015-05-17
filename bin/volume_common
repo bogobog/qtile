@@ -1,0 +1,14 @@
+
+update_volume () {
+	aout=$( amixer sget Master )
+	volume=$( echo $aout | sed -n -e '/Front Right: Playback/s/^[^\[]*\[\([^%]\+\).*/\1/ p' )
+	toggle=$( echo $aout | sed -n -e '/Front Right: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
+
+	if [[ "$toggle" == "off" ]]; then
+		output="<span background=\"#ff0000\">${volume}</span>"
+	else
+		output="${volume}"
+	fi
+
+	echo "V:${output}" > /dev/shm/qtile_volumetextbox
+}
