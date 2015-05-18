@@ -96,7 +96,7 @@ keys = [
     Key( [], "XF86AudioMute", lazy.spawn("/home/judar/bin/qtile/volume_toggle.sh") ),
 
     # lock screen
-    Key([mod], "l", lazy.spawn("xscreensaver-command -lock")),
+    Key([mod], "l", lazy.spawn("/home/judar/bin/qtile/lock.sh")),
 
     # suspend
     Key([mod, "control", "shift"], "F4", lazy.spawn("/home/judar/bin/qtile/suspend.sh")),
