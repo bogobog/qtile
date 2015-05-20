@@ -2,3 +2,5 @@
 
 ${HOME}/bin/qtile/update_time.sh &
 ${HOME}/bin/qtile/update_calendar.sh &
+
+# vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
