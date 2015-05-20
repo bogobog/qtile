@@ -8,6 +8,7 @@ from libqtile import layout, bar, widget, hook
 import custom
 
 mod = "mod4"
+home = os.path.expanduser('~')
 
 keys = [
     # Switch between windows in current stack pane
@@ -88,19 +89,11 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod], "r", lazy.spawn("dmenu_run -i -fn '-*-fixed-*-*-*-*-18-*-*-*-*-*-*-*' -nb '#737373' -nf '#000000'")),
-
-    # volume
-    Key( [], "XF86AudioRaiseVolume", lazy.spawn("/home/judar/bin/qtile/volume_up.sh") ),
-    Key( [], "XF86AudioLowerVolume", lazy.spawn("/home/judar/bin/qtile/volume_down.sh") ),
-    Key( [], "XF86AudioMute", lazy.spawn("/home/judar/bin/qtile/volume_toggle.sh") ),
+    Key([mod], "r", lazy.spawn("dmenu_run -i -fn '-*-droid sans-medium-*-*-*-13-*-*-*-*-*-*-*' -nb '#737373' -nf '#000000'")),
 
     # lock screen
-    Key([mod], "l", lazy.spawn("/home/judar/bin/qtile/lock.sh")),
+    Key([mod], "l", lazy.spawn( home + "/bin/qtile/lock.sh" ) ),
 
-    # suspend
-    Key([mod, "control", "shift"], "F4", lazy.spawn("/home/judar/bin/qtile/suspend.sh")),
-    
 ]
 
 groups = [Group(i) for i in "12345"]
@@ -141,41 +134,6 @@ widget_defaults = dict(
     padding=3,
 )
 
-menu_one_menu_items = [
-    { 'name': 'Apelint',
-      'command': 'apelint_wireless.sh',
-    },
-    { 'name': 'Keepass',
-      'command': 'keepass',
-    }
-]
-
-screens = [
-    Screen(
-        top = bar.Bar(
-            [
-                widget.Systray(),
-                custom.BlackSep(),
-                widget.Battery(),
-                custom.BlackSep(),
-                custom.CommandTextBox( name = 'VolumeTextBox', command = '/home/judar/bin/qtile/volume_toggle.sh' ),
-                custom.BlackSep(),
-                custom.DropDownBox( name = 'TimeDropDownBox' ),
-                custom.BlackSep(),
-                custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
-                custom.BlackSep(),
-                widget.Spacer( width = bar.STRETCH ),
-                custom.BlackSep(),
-                custom.NotificationBox( name = 'NotificationBox' ),
-                custom.BlackSep(),
-                custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
-            ],
-            20,
-            background = '#737373',
-        ),
-    ),
-]
-
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
@@ -203,12 +161,12 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/startup_once.sh'])
 
 @hook.subscribe.startup
 def autostart():
-    home = os.path.expanduser('~')
     subprocess.call([home + '/.config/qtile/startup.sh'])
+
+from config_local import *
 
 # vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
