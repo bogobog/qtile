@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /home/judar/bin/qtile/volume_common
+. ${HOME}/bin/qtile/volume_common
 
-amixer -q sset Master 5%+
+volume_up
 update_volume

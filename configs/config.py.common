@@ -169,4 +169,7 @@ def autostart():
 
 from config_local import *
 
+if 'keys_local' in globals():
+    keys.extend( keys_local )
+
 # vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
