@@ -1,5 +1,5 @@
 
-import os, subprocess
+import os, subprocess, imp, socket
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
@@ -167,9 +167,11 @@ def autostart_once():
 def autostart():
     subprocess.call([home + '/.config/qtile/startup.sh'])
 
-from config_local import *
+local_config = imp.load_source( 'local_config', '%s/.config/qtile/custom/configs/%s.py' % ( home, socket.gethostname() ) )
 
-if 'keys_local' in globals():
-    keys.extend( keys_local )
+if hasattr( local_config, 'keys' ):
+    keys.extend( local_config.keys )
+
+screens = local_config.screens
 
 # vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab

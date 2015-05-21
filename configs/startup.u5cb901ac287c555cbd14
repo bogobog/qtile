@@ -1,0 +1,6 @@
+
+startup () {
+    ${HOME}/bin/qtile/update_time.sh &
+    ${HOME}/bin/qtile/update_calendar.sh &
+    ${HOME}/bin/qtile/update_volume.sh &
+}

@@ -10,7 +10,7 @@ import custom
 mod = "mod4"
 home = os.path.expanduser('~')
 
-keys_local = [
+keys = [
     Key(
         [], "XF86AudioRaiseVolume",
         lazy.spawn( home + "/bin/qtile/volume_up.sh" )

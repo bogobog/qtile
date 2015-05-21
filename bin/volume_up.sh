@@ -1,6 +1,8 @@
 #!/bin/sh
 
-. ${HOME}/bin/qtile/volume_common
+hostname=$( hostname -s )
+
+. ${HOME}/bin/qtile/configs/volume_common.${hostname}
 
 volume_up
 update_volume
