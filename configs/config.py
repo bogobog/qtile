@@ -167,6 +167,11 @@ def autostart_once():
 def autostart():
     subprocess.call([home + '/.config/qtile/startup.sh'])
 
+@hook.subscribe.client_new
+def client_new( c ):
+    if c.window.get_wm_class() and 'Pidgin' in c.window.get_wm_class():
+        c.togroup( '5' )
+
 local_config = imp.load_source( 'local_config', '%s/.config/qtile/custom/configs/config.%s.py' % ( home, socket.gethostname().split('.')[0] ) )
 
 if hasattr( local_config, 'keys' ):
