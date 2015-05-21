@@ -1,19 +1,36 @@
 
 import os
 
-from libqtile.config import Screen
+from libqtile.config import Screen, Key
+from libqtile.command import lazy
 from libqtile import bar, widget
 
 import custom
 
+mod = "mod4"
 home = os.path.expanduser('~')
+
+keys = [
+    Key(
+        [], "XF86AudioRaiseVolume",
+        lazy.spawn( home + "/bin/qtile/volume_up.sh" )
+    ),
+    Key(
+        [], "XF86AudioLowerVolume",
+        lazy.spawn( home + "/bin/qtile/volume_down.sh" )
+    ),
+    Key(
+        [], "XF86AudioMute",
+        lazy.spawn( home + "/bin/qtile/volume_toggle.sh" )
+    ),
+]
 
 menu_one_menu_items = [
     { 'name': 'Apelint',
       'command': 'apelint_wireless.sh',
     },
     { 'name': 'Keepass',
-      'command': 'keepass',
+      'command': 'keepass2',
     }
 ]
 
@@ -32,8 +49,6 @@ screens = [
                 custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
-                custom.BlackSep(),
-                custom.NotificationBox( name = 'NotificationBox' ),
                 custom.BlackSep(),
                 custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
             ],

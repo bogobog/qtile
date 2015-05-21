@@ -1,0 +1,16 @@
+
+startup_once () {
+    if [[ -d "${HOME}/.fonts" ]]; then
+        for d in ${HOME}/.fonts/*; do echo $d; xset fp+ ${d}; done;
+        xset fp rehash
+    fi
+
+    /usr/libexec/notification-daemon &
+    ${HOME}/bin/qtile/agent.py &
+    xsetroot -solid '#939393' &
+    optirun xscreensaver -nosplash &
+    dropbox start -i &
+    pidgin &
+}
+
+# vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab

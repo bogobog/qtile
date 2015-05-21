@@ -167,7 +167,7 @@ def autostart_once():
 def autostart():
     subprocess.call([home + '/.config/qtile/startup.sh'])
 
-local_config = imp.load_source( 'local_config', '%s/.config/qtile/custom/configs/%s.py' % ( home, socket.gethostname() ) )
+local_config = imp.load_source( 'local_config', '%s/.config/qtile/custom/configs/config.%s.py' % ( home, socket.gethostname().split('.')[0] ) )
 
 if hasattr( local_config, 'keys' ):
     keys.extend( local_config.keys )
