@@ -26,6 +26,8 @@ screens = [
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
                 custom.BlackSep(),
+                custom.MarkupTextBox( name = 'NetworkStatusBox', text = ' ' ),
+                custom.BlackSep(),
                 custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
             ],
             20,
