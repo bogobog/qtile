@@ -160,7 +160,7 @@ auto_fullscreen = True
 wmname = "LG3D"
 
 @hook.subscribe.startup_once
-def autostart():
+def autostart_once():
     subprocess.call([home + '/.config/qtile/startup_once.sh'])
 
 @hook.subscribe.startup
