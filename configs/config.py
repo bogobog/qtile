@@ -57,6 +57,12 @@ keys = [
         lazy.layout.shrink()
     ),
 
+    # Swap panes of split stack
+    Key(
+        [mod, "shift"], "Down",
+        lazy.window.enable_minimize()
+    ),
+
     # Switch window focus to other pane(s) of stack
     Key(
         [mod], "space",

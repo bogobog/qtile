@@ -25,9 +25,16 @@ class DropDownGroupBoxChild( DropDownBoxChild ):
             self.parent.bar.screen.setGroup( self.parent.active_group )
             window = self.getWindowItem( e.event_x, e.event_y )
 
+            if window.minimized:
+                window.disablefloating()
+
             window.group.focus( window, False )
+
             if window.floating:
                 window.cmd_bring_to_front()
+
+            self.parent.active_group_windows = []
+            self.parent.active_group = None
 
         DropDownBoxChild.handle_ButtonRelease( self, e )
 
@@ -54,11 +61,22 @@ class DropDownGroupBox( GroupBox ):
                 return
 
             self.active_group_windows = list( clicked_group.windows )
-            self.child.text = '\n'.join( list( win.name.encode( 'ascii', 'ignore' ) for win in self.active_group_windows ) )
+
+            processed_child_text = []
+            for win in self.active_group_windows:
+               if win.minimized:
+                  processed_child_text.append( '<span fgcolor="darkgray">%s</span>' % win.name.encode( 'ascii', 'ignore' ) )
+               else:
+                  processed_child_text.append( win.name.encode( 'ascii', 'ignore' ) )
+
+            self.child.text = '\n'.join( processed_child_text )
+
             self.child.window.unhide()
 
             self.active_group = clicked_group
         else:
+            self.active_group_windows = []
+            self.active_group = None
             self.child.window.hide()
             GroupBox.button_release( self, x, y, button )
 
