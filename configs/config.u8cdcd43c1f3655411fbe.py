@@ -8,12 +8,6 @@ import custom
 
 home = os.path.expanduser('~')
 
-menu_one_menu_items = [
-    { 'name': 'Keepass',
-      'command': 'keepass2',
-    }
-]
-
 screens = [
     Screen(
         top = bar.Bar(
@@ -27,8 +21,6 @@ screens = [
                 widget.Spacer( width = bar.STRETCH ),
                 custom.BlackSep(),
                 custom.MarkupTextBox( name = 'NetworkStatusBox', text = ' ' ),
-                custom.BlackSep(),
-                custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
             ],
             20,
             background = '#737373',

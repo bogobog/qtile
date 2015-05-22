@@ -29,12 +29,6 @@ keys = [
     ),
 ]
 
-menu_one_menu_items = [
-    { 'name': 'Keepass',
-      'command': 'keepass2',
-    }
-]
-
 screens = [
     Screen(
         top = bar.Bar(
@@ -51,7 +45,7 @@ screens = [
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
                 custom.BlackSep(),
-                custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
+                custom.MarkupTextBox( name = 'NetworkStatusBox', text = ' ' ),
             ],
             20,
             background = '#737373',

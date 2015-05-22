@@ -33,9 +33,6 @@ menu_one_menu_items = [
     { 'name': 'Apelint',
       'command': 'apelint_wireless.sh',
     },
-    { 'name': 'Keepass',
-      'command': 'keepass2',
-    }
 ]
 
 screens = [
@@ -54,9 +51,9 @@ screens = [
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
                 custom.BlackSep(),
-                custom.MarkupTextBox( name = 'NetworkStatusBox', text = ' ' ),
-                custom.BlackSep(),
                 custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
+                custom.BlackSep(),
+                custom.MarkupTextBox( name = 'NetworkStatusBox', text = ' ' ),
             ],
             20,
             background = '#737373',
