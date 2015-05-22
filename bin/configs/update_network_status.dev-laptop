@@ -1,0 +1,14 @@
+
+update_network_status () {
+    global_status=$( nmcli -f state -t general )
+
+    if [ "${global_status}" = 'connected' ]; then
+        current_devices=$( nmcli -f device,state -t device | grep connected | awk -F: '{ print $1 }' | xargs )
+        output="<span bgcolor=\"darkgreen\">${current_devices}</span>"
+    else
+        output="<span bgcolor=\"red\">Down</span>"
+    fi
+
+    echo $output > /dev/shm/qtile_networkstatusbox
+
+}

@@ -1,12 +1,7 @@
 #!/bin/sh
 
-global_status=$( nm-tool | grep '^State' | awk '{ print $2 }' )
+hostname=$( hostname -s )
 
-if [ "${global_status}" = 'connected' ]; then
-    current_devices=$( nm-tool | grep -E ' (Device|State)' | grep -B1 connected | grep Device | awk '{ print $3 }' | xargs )
-    output="<span bgcolor=\"darkgreen\">${current_devices}</span>"
-else
-    output="<span bgcolor=\"red\">Down</span>"
-fi
+. ${HOME}/bin/qtile/configs/update_network_status.${hostname}
 
-echo $output > /dev/shm/qtile_networkstatusbox
+update_network_status

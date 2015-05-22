@@ -23,6 +23,10 @@ keys = [
         [], "XF86AudioMute",
         lazy.spawn( home + "/bin/qtile/volume_toggle.sh" )
     ),
+    Key(
+        [mod, 'control', 'shift'], "F4",
+        lazy.spawn( home + "/bin/qtile/suspend.sh" )
+    ),
 ]
 
 menu_one_menu_items = [
@@ -49,6 +53,8 @@ screens = [
                 custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
+                custom.BlackSep(),
+                custom.MarkupTextBox( name = 'NetworkStatusBox', text = ' ' ),
                 custom.BlackSep(),
                 custom.MenuBox( name = 'MenuOneMenuBox', title = 'M1', menu_items = menu_one_menu_items ),
             ],
