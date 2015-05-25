@@ -45,6 +45,8 @@ screens = [
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
                 custom.BlackSep(),
+                custom.LoadAverageBox(),
+                custom.BlackSep(),
                 custom.NetworkStatusBox(),
             ],
             20,

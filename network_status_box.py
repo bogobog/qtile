@@ -1,5 +1,4 @@
 
-import time
 import dbus
 
 from .markup_threaded_poll_text import MarkupThreadedPollText
