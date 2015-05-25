@@ -10,7 +10,6 @@ WATCHERS_MANIFEST = {
     'timetextbox': { 'widget_name': 'timetextbox', 'interval': 1, 'update_child': False },
     'timedropdownbox': { 'widget_name': 'TimeDropDownBox', 'interval': 1, 'update_child': False },
     'timedropdownbox_child': { 'widget_name': 'TimeDropDownBox', 'interval': 5, 'update_child': True },
-    'networkstatusbox': { 'widget_name': 'NetworkStatusBox', 'interval': 1, 'update_child': False },
 }
 
 class INotifyWatcher( object ):
