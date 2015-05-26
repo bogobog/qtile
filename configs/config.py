@@ -131,6 +131,7 @@ floating_layout = layout.floating.Floating( float_rules = [
     "dialog",
     "keepass2",
     "kcalc",
+    "vpnui",
   ) ]
 )
 
