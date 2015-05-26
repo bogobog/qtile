@@ -1,8 +1,8 @@
 
 startup_once () {
 
-    if [[ -d "${HOME}/.fonts" ]]; then
-        for d in ${HOME}/.fonts/*; do echo $d; xset fp+ ${d}; done;
+    if [ -d "${HOME}/.fonts" ]; then
+        for d in ${HOME}/.fonts/*; do xset fp+ ${d}; done;
         xset fp rehash
     fi
 
