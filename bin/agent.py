@@ -7,7 +7,6 @@ from libqtile.ipc import IPCError
 
 WATCHERS_MANIFEST = { 
     'volumetextbox': { 'widget_name': 'VolumeTextBox', 'interval': 0.1, 'update_child': False },
-    'timetextbox': { 'widget_name': 'timetextbox', 'interval': 1, 'update_child': False },
     'timedropdownbox': { 'widget_name': 'TimeDropDownBox', 'interval': 1, 'update_child': False },
     'timedropdownbox_child': { 'widget_name': 'TimeDropDownBox', 'interval': 5, 'update_child': True },
 }
