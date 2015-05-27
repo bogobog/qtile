@@ -5,6 +5,7 @@ startup_once () {
         xset fp rehash
     fi
 
+    /usr/sbin/syndaemon -k -d &
     /usr/local/libexec/notification-daemon &
     ${HOME}/bin/qtile/agent.py &
     xsetroot -solid '#939393' &
