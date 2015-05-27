@@ -24,5 +24,14 @@ volume_up () {
 }
 
 volume_toggle () {
-    ${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    aout=$( ${AMIXER_COMMAND_PREFIX} sget Master )
+    toggle=$( echo $aout | sed -n -e '/Mono: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
+
+    if [ "${toggle}" = "off" ]; then
+    	${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset Headphone toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset PCM toggle
+    else
+    	${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    fi
 }
