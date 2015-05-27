@@ -1,0 +1,37 @@
+
+export AMIXER_COMMAND_PREFIX="amixer -c 1"
+
+update_volume () {
+	aout=$( ${AMIXER_COMMAND_PREFIX} sget Master )
+	volume=$( echo $aout | sed -n -e '/Mono: Playback/s/^[^\[]*\[\([^%]\+\).*/\1/ p' )
+	toggle=$( echo $aout | sed -n -e '/Mono: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
+
+	if [ "${toggle}" = "off" ]; then
+		output="<span background=\"#ff0000\">${volume}</span>"
+	else
+		output="${volume}"
+	fi
+	
+	echo "V:${output}" > /dev/shm/qtile_volumetextbox
+}
+
+volume_down () {
+    ${AMIXER_COMMAND_PREFIX} -q sset Master 5%-
+}
+
+volume_up () {
+    ${AMIXER_COMMAND_PREFIX} -q sset Master 5%+
+}
+
+volume_toggle () {
+    aout=$( ${AMIXER_COMMAND_PREFIX} sget Master )
+    toggle=$( echo $aout | sed -n -e '/Mono: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
+
+    if [ "${toggle}" = "off" ]; then
+    	${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset Headphone toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset PCM toggle
+    else
+    	${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    fi
+}
