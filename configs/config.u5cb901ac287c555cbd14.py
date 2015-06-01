@@ -23,10 +23,6 @@ keys = [
         [], "XF86AudioMute",
         lazy.spawn( home + "/bin/qtile/volume_toggle.sh" )
     ),
-    Key(
-        [mod, 'control', 'shift'], "F3",
-        lazy.spawn( home + "/bin/qtile/suspend.sh" )
-    ),
 ]
 
 screens = [
