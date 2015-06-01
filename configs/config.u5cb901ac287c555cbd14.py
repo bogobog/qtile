@@ -23,6 +23,10 @@ keys = [
         [], "XF86AudioMute",
         lazy.spawn( home + "/bin/qtile/volume_toggle.sh" )
     ),
+    Key(
+        [], "XF86Display",
+        lazy.spawn( home + "/bin/toggle_monitors.sh" )
+    ),
 ]
 
 screens = [
@@ -44,6 +48,28 @@ screens = [
                 custom.LoadAverageBox(),
                 custom.BlackSep(),
                 custom.NetworkStatusBox(),
+            ],
+            20,
+            background = '#737373',
+        ),
+    ),
+    Screen(
+        top = bar.Bar(
+            [
+                custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
+                custom.BlackSep(),
+                widget.Spacer( width = bar.STRETCH ),
+            ],
+            20,
+            background = '#737373',
+        ),
+    ),
+    Screen(
+        top = bar.Bar(
+            [
+                custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
+                custom.BlackSep(),
+                widget.Spacer( width = bar.STRETCH ),
             ],
             20,
             background = '#737373',
