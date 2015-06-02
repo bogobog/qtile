@@ -1,14 +1,25 @@
+#!/bin/sh
 
-suspend_system () {
-    # before
+HOME=/home/judar
+
+suspend_system_pre () {
     xscreensaver-command -lock
     pkill -f keepass
+}
 
-    sleep 2
-    sudo systemctl suspend
-
-    # after
+suspend_system_post () {
     ${HOME}/bin/qtile/update_calendar.sh
     ${HOME}/bin/qtile/update_time.sh
     ${HOME}/bin/qtile/update_volume.sh
 }
+
+case $1/$2 in
+  pre/*)
+    echo "Going to $2..."
+    suspend_system_pre
+    ;;
+  post/*)
+    echo "Waking up from $2..."
+    suspend_system_post
+    ;;
+esac
