@@ -146,7 +146,7 @@ class DropDownBoxChild( CommandObject ):
             return
 
         self.window.place( 
-            self.x,
+            self.screen.x + self.x,
             self.y,
             self.width,
             self.height,
