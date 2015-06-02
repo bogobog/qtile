@@ -102,18 +102,21 @@ keys = [
 
 ]
 
-groups = [Group(i) for i in "12345"]
+groups = [ Group(i) for i in [ "Kon", "Web", "Mail", "Dev", "Comm", ] ]
 
+x = 1
 for i in groups:
     # mod1 + letter of group = switch to group
     keys.append(
-        Key([mod], i.name, lazy.group[i.name].toscreen())
+        Key([mod], str( x ), lazy.group[i.name].toscreen())
     )
 
     # mod1 + shift + letter of group = switch to & move focused window to group
     keys.append(
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
+        Key([mod, "shift"], str( x ), lazy.window.togroup(i.name))
     )
+
+    x += 1
 
 layouts = [
     layout.Max(),
@@ -177,7 +180,7 @@ def autostart():
 @hook.subscribe.client_new
 def client_new( c ):
     if c.window.get_wm_class() and 'Pidgin' in c.window.get_wm_class():
-        c.togroup( '5' )
+        c.togroup( 'Comm' )
 
 local_config = imp.load_source( 'local_config', '%s/.config/qtile/custom/configs/config.%s.py' % ( home, socket.gethostname().split('.')[0] ) )
 
