@@ -84,13 +84,13 @@ for i in groups:
     keys.append(
         Key([mod], str( x ), lazy.group[i.name].toscreen())
     )
+    x += 1
 
     # mod1 + shift + letter of group = switch to & move focused window to group
     keys.append(
-        Key([mod, "shift"], str( x ), lazy.window.togroup(i.name))
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
     )
 
-    x += 1
 
 layouts = [
     layout.Max(),
