@@ -1,5 +1,9 @@
 
-import os, subprocess, imp, socket
+import os
+import subprocess
+import imp
+import socket
+import re
 
 from libqtile.config import Key, Screen, Group, Drag, Click
 from libqtile.command import lazy
@@ -78,23 +82,20 @@ keys = [
 
 groups = [ Group(i) for i in "kwdmc" ]
 
-x = 1
 for i in groups:
     # mod1 + letter of group = switch to group
     keys.append(
-        Key([mod], str( x ), lazy.group[i.name].toscreen())
+        Key([mod], i.name, lazy.group[i.name].toscreen())
     )
-    x += 1
 
     # mod1 + shift + letter of group = switch to & move focused window to group
     keys.append(
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name))
     )
 
-
 layouts = [
     layout.Max(),
-    custom.SmallerMonadTall()
+    custom.SmallerMonadTall(ratio=0.15)
 ]
 
 floating_layout = layout.floating.Floating( float_rules = [ 
@@ -159,7 +160,10 @@ def client_new( c ):
         elif 'konsole' in c.window.get_wm_class():
             c.togroup( 'k' )
         elif 'Firefox' in c.window.get_wm_class():
-            c.togroup( 'w' )
+            if re.search( 'Outlook Web App', c.window.get_wm_name() ):
+                c.togroup( 'm' )
+            else:
+                c.togroup( 'w' )
 
 local_config = imp.load_source( 'local_config', '%s/.config/qtile/custom/configs/config.%s.py' % ( home, socket.gethostname().split('.')[0] ) )
 
