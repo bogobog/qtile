@@ -39,7 +39,7 @@ screens = [
                 custom.BlackSep(),
                 custom.CommandTextBox( name = 'VolumeTextBox', command = home + '/bin/qtile/volume_toggle.sh' ),
                 custom.BlackSep(),
-                custom.DropDownBox( name = 'TimeDropDownBox' ),
+                custom.DropDownBox( name = 'TimeDropDownBox1' ),
                 custom.BlackSep(),
                 custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
                 custom.BlackSep(),
@@ -56,6 +56,8 @@ screens = [
     Screen(
         top = bar.Bar(
             [
+                custom.DropDownBox( name = 'TimeDropDownBox2' ),
+                custom.BlackSep(),
                 custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
@@ -69,6 +71,8 @@ screens = [
     Screen(
         top = bar.Bar(
             [
+                custom.DropDownBox( name = 'TimeDropDownBox3' ),
+                custom.BlackSep(),
                 custom.DropDownGroupBox( highlight_method = 'block', rounded = False, disable_drag = True, ),
                 custom.BlackSep(),
                 widget.Spacer( width = bar.STRETCH ),
