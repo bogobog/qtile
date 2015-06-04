@@ -10,6 +10,6 @@ class CommandTextBox( MarkupTextBox ):
         self.button_command = command
     
     def button_release( self, x, y, button ):
-        self.call_process( self.button_command )
+        self.qtile.cmd_spawn( self.button_command )
 
 # vim: tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab
