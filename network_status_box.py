@@ -9,11 +9,11 @@ class NetworkStatusBox( MarkupThreadedPollText ):
     GLOBAL_STATE_ICON = [ '?', 'v', 'v', 'v', '*', '^', '^', '^' ]
     CONNECTION_STATE_COLORS = [ '#737373', '#b2b200', 'darkgreen', '#ff9900', '#737373' ]
     BUS_NAME = 'org.freedesktop.NetworkManager'
-    CLICK_COMMAND = '/bin/kde-nm-connection-editor'
 
     defaults = [
         ("update_interval", 5, "Update interval in seconds, if none, the "
             "widget updates whenever the event loop is idle."),
+        ("connection_editor_command", '/bin/kde-nm-connection-editor', "On-click command." ),
     ]
 
     def __init__( self, *args, **kwargs ):
@@ -22,7 +22,7 @@ class NetworkStatusBox( MarkupThreadedPollText ):
         self.bus = dbus.SystemBus()
 
     def button_release( self, x, y, button ):
-        self.qtile.cmd_spawn( self.CLICK_COMMAND )
+        self.qtile.cmd_spawn( self.connection_editor_command )
 
     def poll( self ):
         output = []
