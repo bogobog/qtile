@@ -7,8 +7,8 @@ from libqtile.ipc import IPCError
 
 WATCHERS_MANIFEST = { 
     'volumetextbox': { 'widget_name': 'VolumeTextBox', 'interval': 0.1, 'update_child': False },
-    'timedropdownbox': { 'widget_name': 'TimeDropDownBox', 'interval': 1, 'update_child': False },
-    'timedropdownbox_child': { 'widget_name': 'TimeDropDownBox', 'interval': 5, 'update_child': True },
+    'timedropdownbox': { 'widget_name': [ 'TimeDropDownBox1', 'TimeDropDownBox2', 'TimeDropDownBox3' ], 'interval': 1, 'update_child': False },
+    'timedropdownbox_child': { 'widget_name': [ 'TimeDropDownBox1', 'TimeDropDownBox2', 'TimeDropDownBox3' ], 'interval': 5, 'update_child': True },
 }
 
 class INotifyWatcher( object ):
@@ -52,22 +52,25 @@ class INotifyWatcher( object ):
 
     def notify_handler( self, event ):
 
-        global qtile_client
-
         with file( self.watch_file, 'r' ) as wf:
             file_contents = wf.read().rstrip()
 
-        target_func = ( self.update_child and self.qtile_client.widget[ self.widget_name ].update_child ) or self.qtile_client.widget[ self.widget_name ].update
-
-        try:
-            self.QTILE_CLIENT_LOCK.acquire()
-            target_func( file_contents )
-        except ( IPCError, CommandError ) as e:
-            time.sleep( 1 )
-            self.QTILE_CLIENT_LOCK.release()
-            self.notify_handler( event )
+        if isinstance( self.widget_name, list ):
+            widget_list = self.widget_name
         else:
-            self.QTILE_CLIENT_LOCK.release()
+            widget_list = [ self.widget_name, ]
+
+        for widget_name in widget_list:
+            target_func = ( self.update_child and self.qtile_client.widget[ widget_name ].update_child ) or self.qtile_client.widget[ widget_name ].update
+
+            try:
+                self.QTILE_CLIENT_LOCK.acquire()
+                target_func( file_contents )
+            except ( IPCError, CommandError ) as e:
+                self.QTILE_CLIENT_LOCK.release()
+                continue
+            else:
+                self.QTILE_CLIENT_LOCK.release()
 
 if __name__ == '__main__':
     
