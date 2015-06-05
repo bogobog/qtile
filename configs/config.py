@@ -160,7 +160,7 @@ def client_new( c ):
         elif 'konsole' in c.window.get_wm_class():
             c.togroup( 'k' )
         elif 'Firefox' in c.window.get_wm_class():
-            if re.search( 'Outlook Web App', c.window.get_wm_name() ):
+            if re.search( 'Outlook Web App', c.window.get_name() ):
                 c.togroup( 'm' )
             else:
                 c.togroup( 'w' )
