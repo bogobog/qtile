@@ -1,5 +1,5 @@
 
-export AMIXER_COMMAND_PREFIX="amixer"
+export AMIXER_COMMAND_PREFIX="amixer -c 0"
 
 update_volume () {
 	aout=$( ${AMIXER_COMMAND_PREFIX} sget Master )

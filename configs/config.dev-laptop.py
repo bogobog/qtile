@@ -43,7 +43,7 @@ screens = [
                 custom.BlackSep(),
                 widget.Battery(),
                 custom.BlackSep(),
-                custom.CommandTextBox( name = 'VolumeTextBox', command = home + '/bin/qtile/volume_toggle.sh' ),
+                custom.Volume(),
                 custom.BlackSep(),
                 custom.DropDownBox( name = 'TimeDropDownBox1' ),
                 custom.BlackSep(),
