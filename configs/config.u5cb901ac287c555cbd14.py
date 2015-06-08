@@ -27,6 +27,10 @@ keys = [
         [], "XF86Display",
         lazy.spawn( home + "/bin/toggle_monitors.sh" )
     ),
+    Key(
+        [], "XF86Sleep",
+        lazy.spawn( home + "/bin/qtile/suspend.sh" )
+    ),
 ]
 
 screens = [
@@ -37,7 +41,7 @@ screens = [
                 custom.BlackSep(),
                 widget.Battery(),
                 custom.BlackSep(),
-                custom.CommandTextBox(name='VolumeTextBox', command=home+'/bin/qtile/volume_toggle.sh'),
+                custom.Volume(cardid=1, device='hw:1', mute_command=home + '/bin/qtile/volume_toggle.sh'),
                 custom.BlackSep(),
                 custom.DropDownBox(name='TimeDropDownBox1'),
                 custom.BlackSep(),
