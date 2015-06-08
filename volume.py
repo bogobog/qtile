@@ -14,3 +14,4 @@ class Volume(widget.Volume):
             self.text = '<span bgcolor="red"> M </span>'
         else:
             self.text = self.text.rstrip('%').center( 3 )
+

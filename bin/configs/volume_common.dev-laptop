@@ -3,8 +3,8 @@ export AMIXER_COMMAND_PREFIX="amixer -c 0"
 
 update_volume () {
 	aout=$( ${AMIXER_COMMAND_PREFIX} sget Master )
-	volume=$( echo $aout | sed -n -e '/Front Right: Playback/s/^[^\[]*\[\([^%]\+\).*/\1/ p' )
-	toggle=$( echo $aout | sed -n -e '/Front Right: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
+	volume=$( echo $aout | sed -n -e '/Mono: Playback/s/^[^\[]*\[\([^%]\+\).*/\1/ p' )
+	toggle=$( echo $aout | sed -n -e '/Mono: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
 
 	if [ "${toggle}" = "off" ]; then
 		output="<span background=\"#ff0000\">${volume}</span>"
@@ -24,5 +24,15 @@ volume_up () {
 }
 
 volume_toggle () {
-    ${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    aout=$( ${AMIXER_COMMAND_PREFIX} sget Master )
+    toggle=$( echo $aout | sed -n -e '/Mono: Playback/s/^.*\[\([^]]\+\).*/\1/ p' )
+
+    if [ "${toggle}" = "off" ]; then
+    	${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset Headphone toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset Speaker toggle
+    else
+    	${AMIXER_COMMAND_PREFIX} -q sset Master toggle
+    	${AMIXER_COMMAND_PREFIX} -q sset Headphone toggle
+    fi
 }
